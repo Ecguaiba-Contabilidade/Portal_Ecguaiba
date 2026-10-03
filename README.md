@@ -132,7 +132,7 @@ A lista fica em `RTC_Ecguaiba/_rtc.php` (`RTC_FONTES`). **Se algum arquivo mudar
 ajuste ali** e envie o `_rtc.php` ao servidor. Desde 27/09/2026 a cópia local desse e dos
 demais arquivos de `RTC_Ecguaiba/` (`_calculo.php`, `_painel.php`, `api.php`, `chave.php`,
 `index.php`, `.htaccess`) NÃO fica mais aqui: mora em
-`XML - Projetos\RTC - Ecguaiba - Analise Opcao Simples\servidor_php`, por ser código
+`XML - Projetos\Portal Ecguaiba\RTC - Ecguaiba - Analise Opcao Simples\servidor_php`, por ser código
 específico do painel RTC, não do portal em geral — ver LEIA-ME de lá.
 
 **Fluxo de atualização:** ao abrir o painel, o servidor compara esses arquivos com os usados
@@ -141,14 +141,14 @@ prévia (não grava) → "Aplicar atualização" grava a base nova. Grupos e obs
 tocados. Qualquer pessoa da equipe pode aplicar; fica registrado quem aplicou.
 
 **Cálculo:** `RTC_Ecguaiba/_calculo.php` é o porte do `calcular()`/`classificar()` do
-`rtc_comunicacao_opcao_simples.py` (projeto `XML - Projetos\RTC - Ecguaiba - Analise Opcao Simples`,
+`rtc_comunicacao_opcao_simples.py` (projeto `XML - Projetos\Portal Ecguaiba\RTC - Ecguaiba - Analise Opcao Simples`,
 que é irmão — não mais subpasta — do `01 Cadastro de Empresas`).
 Conferido em 26/09/2026: mesmo resultado do Python, 130 matrizes, zero diferenças.
 **Se mudar uma regra no Python, mude igual no `_calculo.php`.** Isso não é automático nem
 periódico: é um passo manual só quando uma regra de cálculo muda (raro). A cópia local desse
 e dos demais arquivos PHP do painel (`_painel.php`, `_rtc.php`, `api.php`, `chave.php`,
 `index.php`, `.htaccess`) fica em
-`XML - Projetos\RTC - Ecguaiba - Analise Opcao Simples\servidor_php` (não mais aqui no
+`XML - Projetos\Portal Ecguaiba\RTC - Ecguaiba - Analise Opcao Simples\servidor_php` (não mais aqui no
 Portal Ecguaiba, desde 27/09/2026) — depois de editar, envie o arquivo ao servidor pelo
 cPanel, como sempre.
 
@@ -284,7 +284,7 @@ Desde 30/09/2026. Cópia do `/nfse_ecguaiba/` (padrão A, só consulta, sem `api
   → `public_html/nfse_contabsul/`. Dados do servidor: `ecg_portal/nfse_contabsul/painel_cache.*`.
 - Lê da biblioteca Base de Dados do site XMLContabsul (`nfse_contabsul_drive_id` ou, na falta,
   `rtc_contabsul_drive_id`): `Painel XML Portal NFSe/dados_painel/resumo_importacao_nfse.html`,
-  gravado pelo `gerar_painel.py` de `XML Contabsul - Projetos\Painel XML Portal NFSe` a cada rodada
+  gravado pelo `gerar_painel.py` de `XML - Projetos\Portal Ecguaiba\Painel XML Portal NFSe - Contabsul` a cada rodada
   do agente `XML - Agentes\NFSe Contabsul` (tarefa "NFSe Contabsul - Rodar Tudo", de hora em hora, minuto :25).
 - Acesso: grupo `grupo_contabsul_id` (não usa `eh_equipe()`). O PHP recusa painel sem
   `"escritorio": "contabsul"` — nunca entrega o da Ecguaíba.
@@ -319,7 +319,7 @@ Desde 30/09/2026. Cópia do §4f para a Contabsul (padrão A, só consulta).
   → `public_html/nfse_dominio_contabsul/`. Cache: `ecg_portal/nfse_dominio_contabsul/painel_cache.*`.
 - Lê da biblioteca Base de Dados do site XMLContabsul (`nfse_contabsul_drive_id` ou, na falta,
   `rtc_contabsul_drive_id`): `Painel XML Portal NFSe x Domínio/dados_painel/servicos_prestados_nfse_x_dominio.html`
-  (~2,3 MB), gravado pelo `gerar_painel.py` de `XML Contabsul - Projetos\Painel XML Portal NFSe x Domínio`
+  (~2,3 MB), gravado pelo `gerar_painel.py` de `XML - Projetos\Portal Ecguaiba\Painel XML Portal NFSe x Domínio - Contabsul`
   (banco do Domínio da Contabsul, DSN **Contabil2**; o `dominio.ini` fica em `XML Contabsul - Base de Dados\Banco de Dados Dominio`).
 - **Automático desde 30/09/2026:** passo 4/4 do agente `XML - Agentes\NFSe Contabsul` (de hora em hora, minuto :25).
   Fora da rede do escritório o passo falha (só no log) e o portal continua mostrando a última cópia.
@@ -370,7 +370,7 @@ clientes) — não código nem dado de um painel específico. Dois conjuntos de 
 já estiveram aqui saíram, ambos em 27/09/2026:
 
 - `public_html/RTC_Ecguaiba/*.php` e `.htaccess` (o código PHP do painel RTC) agora ficam em
-  `XML - Projetos\RTC - Ecguaiba - Analise Opcao Simples\servidor_php`, por serem
+  `XML - Projetos\Portal Ecguaiba\RTC - Ecguaiba - Analise Opcao Simples\servidor_php`, por serem
   específicos desse painel, não do portal em geral.
 - Os arquivos gerados pelo `gerar_modelo_web.py` do projeto RTC (`painel_modelo.html`,
   `mensagens_padrao.json`) vivem só na pasta de staging do próprio projeto RTC
