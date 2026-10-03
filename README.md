@@ -17,7 +17,7 @@ Cada assunto tem um dono só; os outros apontam para ele.
 
 | Arquivo | Assunto | Quando ler |
 |---|---|---|
-| `LEIA-ME.md` | Visão geral, servidor, Microsoft 365, tarefas comuns, pendências | Sempre |
+| `LEIA-ME.md` | Visão geral, servidor, Microsoft 365, tarefas comuns, pendências, pastas locais (§7) | Sempre |
 | `01-enderecos-e-login.md` | Endereços oficiais, `volta`, `_areas.php`, teste obrigatório | Antes de criar, mover ou publicar uma área |
 | `02-migrar-painel-para-o-portal.md` | Padrões A/B, receita de migração, regras de PHP/Graph/servidor | Ao levar um painel local para o site |
 | `03-web-validacao-paineis.md` | Cópia local de conferência (`XML - web_validacao`) | Ao mexer no Python que gera painel |
@@ -129,7 +129,55 @@ nunca são entregues. Páginas HTML recebem o selo "nome · Sair".
 
 ---
 
-## 7. Esta pasta
+## 7. Pastas na máquina local
+
+Tudo fica em `C:\Onedrive\Ecguaiba Contabilidade\`, sincronizado com o SharePoint. Um painel do
+portal usa **quatro pastas**, sempre com o mesmo nome de projeto (regra completa em `02` §1):
+
+| Pasta | Papel | O que tem | Quem grava |
+|---|---|---|---|
+| `XML - Projetos\Portal Ecguaiba\` | **Código** | `.py`/`.bat` de cada painel, estes documentos, `servidor\` | Você (edição de código) |
+| `XML - Base de Dados\` | **Dados** + HTML que o site lê | Biblioteca **Base de Dados** do site SharePoint **XML** (`rtc_drive_id`). O PHP do portal lê daqui via Graph | Os scripts Python e o próprio portal (gravações da equipe) |
+| `XML - web_validacao\` | **Conferência local** | Cópia do HTML de cada painel, gerada na mesma rodada que a cópia web | Só os scripts; **somente leitura** (`03`) |
+| `XML - ecguaiba_com_br\` | **Staging do site** | PHP de cada painel + ferramentas de FTP, pronto para enviar ao `public_html` | Você; depois envio por FTP (`05`) |
+
+Fluxo: **código** gera → **dados** (SharePoint, o site lê) + **validação** (você confere);
+o **staging** só muda quando muda o PHP do painel.
+
+**`XML - Base de Dados\`** — além das pastas de painel, guarda bases brutas usadas por vários projetos:
+
+- Por painel (cada uma com `dados_painel\` = HTML publicado, e às vezes `conferencia\`):
+  `01 Cadastro Empresas` (atenção: sem "de", ao contrário do projeto; `dados_rfb`, `dados_dominio`, `dados_classificacao` etc.),
+  `Painel XML Portal NFSe`, `Painel XML Portal NFSe x Domínio`, `Contabil - Gestão`,
+  `Contabil - Gestão - Contabsul` (Gestão Contabsul lê daqui, ver `06`), `DP Pessoal - Gestão`,
+  `Contabil - Painel Grupo Kalata` (`cliente.json`), `RTC - *`.
+- Fontes externas: `API Digisac`, `API Office 365`, `API Omie Gclick`, `Banco de Dados Dominio`,
+  `Dados Abertos RFB`.
+- Análises e projetos fora do portal: `Análise *`, `Cobertura XML`, `EFD ICMS IPI`, `Matriz Tributaria`,
+  `Projeto Simples Nacional`, `Painel XML Web Service Sefaz*`, `Regras de Importação e Acumulador` etc.
+- **Contabsul:** a base equivalente é `XML Contabsul - Base de Dados` (site **XMLContabsul**, `rtc_contabsul_drive_id`).
+
+**`XML - web_validacao\`** — uma subpasta por painel, nomeada como o projeto (com ` - Ecguaiba` /
+` - Contabsul` quando o mesmo projeto atende os dois). Arquivos `*_DEMO.html` são painéis de
+demonstração. Pares projeto → pasta e pendências: `03` §2. Não edite à mão: a próxima rodada sobrescreve.
+
+**`XML - ecguaiba_com_br\`** — uma subpasta por painel com o PHP (`_<area>.php`, `index.php`,
+`api.php`, `.htaccess`) ou `public_html\` + `ENVIAR.md` (Gestão, DP, Grupo Kalata). Especiais:
+
+- `FTP\` — `ftp-ecguaiba.sh`, `contas.conf`, `LEIA-ME.md` (`05`).
+- `RTC - * - Analise Opcao Simples\` — `painel_modelo.html` e `mensagens_padrao.json`, gravados pelo
+  `gerar_modelo_web.py --publicar` (vão para `ecg_portal/rtc/`, não para `public_html`; `06`).
+- `RTC_Ecguaiba\` — só `dominio.ini`; sobra a conferir.
+
+**`XML - Projetos\Portal Ecguaiba\`** — esta pasta (detalhe no §8).
+
+Outras pastas `XML - *` ao lado (`Agentes`, `Ecguaiba Painel Fiscal`, `Documentos Fiscais`…) não
+são do portal; `XML - Agentes\` chama os scripts daqui (regra 5 do §5) e `XML - Ecguaiba Painel Fiscal`
+guarda os painéis só locais.
+
+---
+
+## 8. Esta pasta
 
 ```
 LEIA-ME.md, 01-…06-*.md       documentos do portal (acima)
